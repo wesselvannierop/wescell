@@ -1,5 +1,12 @@
 # Unsupervised Cell Segmentation by Invariant Information Clustering
 
+<p align="center">
+<figure align="center">
+  <img src="./images/wescell.png" style="width: 500;"/>
+  <figcaption><strong>Example of the proposed unsupervised cell-segmentation algorithm.</strong></figcaption>
+</figure>
+</p>
+
 ## Introduction
 
 Unsupervised Cell Segmentation by Invariant Information Clustering created by Wessel L. van Nierop.
