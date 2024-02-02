@@ -1,15 +1,18 @@
-import torch
-import pytorch_lightning as pl
+from pathlib import Path
 from pprint import pprint
+
+import pytorch_lightning as pl
+import torch
 from torchvision.utils import save_image
+
+from general.data.data_pair_creation import DataTransformPair
+from general.metrics.metrics import CellConfluencyMetrics
+from general.model.iic_loss import IICloss
+from general.model.unet.unet_decoder import UNetDecoderWithSoftmax
 
 # Local imports
 from general.model.unet.unet_encoder import UNetEncoder
-from general.model.unet.unet_decoder import UNetDecoderWithSoftmax
-from general.metrics.metrics import CellConfluencyMetrics
-from general.model.iic_loss import IICloss
-from general.data.data_pair_creation import DataTransformPair
-from general.utils import remap, get_confusion_matrix_overlaid_mask
+from general.utils import get_confusion_matrix_overlaid_mask, remap
 
 
 class UnsupervisedWesCell(pl.LightningModule):
@@ -55,7 +58,9 @@ class UnsupervisedWesCell(pl.LightningModule):
             nr_of_clusters=self.nr_of_clusters,
         )
 
-        self.save_folder = save_folder
+        if save_folder is not None:
+            self.save_folder = Path(save_folder)
+            self.save_folder.mkdir(exist_ok=True)
 
     def training_step(self, batch, _):
         # Extract data
@@ -78,7 +83,7 @@ class UnsupervisedWesCell(pl.LightningModule):
         return loss
 
     def validation_step(self, batch, batch_idx):
-        image, target, name = batch
+        image, target, names = batch
         pred = self(image)
 
         binary_pred = torch.argmax(pred, dim=1, keepdim=True)
@@ -90,13 +95,17 @@ class UnsupervisedWesCell(pl.LightningModule):
 
         # Save preds if save_folder is set
         if self.save_folder is not None:
-            save_image(binary_pred, str(self.save_folder / f"{name}_predicted.png"))
+            for binary_pred_, name in zip(binary_pred, names):
+                save_image(binary_pred_.float(), str(self.save_folder / f"{name}_predicted.png"))
 
     def predict_step(self, batch, *_):
-        image, name = batch
+        assert self.save_folder is not None, "Predict step only works when save_folder is set."
+
+        image, names = batch
         pred = self(image)
         pred = torch.argmax(pred, dim=1, keepdim=True)
-        save_image(pred, str(self.save_folder / f"{name}_predicted.png"))
+        for pred_, name in zip(pred, names):
+            save_image(pred_.float(), str(self.save_folder / f"{name}_predicted.png"))
 
     def on_validation_epoch_end(self):
         # Compute metrics, log to tensorboard and reset the metrics for reuse

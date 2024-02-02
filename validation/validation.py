@@ -1,10 +1,11 @@
-import torchvision.transforms as T
 import pytorch_lightning as pl
+import torchvision.transforms as T
+
+from general.data.dataloaders.generic import GenericDataModule, GenericDataset
+from general.data.illumination_correction import IlluminationCorrection
 
 # Local imports
 from general.model import UnsupervisedWesCell
-from general.data.illumination_correction import IlluminationCorrection
-from general.data.dataloaders.generic import GenericDataModule, GenericDataset
 
 
 def model_eval(
@@ -44,7 +45,7 @@ def model_eval(
         T.Normalize(*normalization),
     ]
 
-    module = UnsupervisedWesCell().load_from_checkpoint(ckpt_path, save_folder=save_folder)
+    module = UnsupervisedWesCell.load_from_checkpoint(ckpt_path, save_folder=save_folder)
 
     # Init data module
     val_data_module = GenericDataModule(
