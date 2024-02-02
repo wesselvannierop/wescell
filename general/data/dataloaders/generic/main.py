@@ -1,10 +1,10 @@
+from pathlib import Path
+from typing import Callable, Optional
+
+import pytorch_lightning as pl
 from PIL import Image
 from torch.utils.data import DataLoader
-import pytorch_lightning as pl
 from torchvision.datasets import VisionDataset
-from typing import Optional, Callable
-from pathlib import Path
-from typing import Callable
 
 
 class GenericDataset(VisionDataset):

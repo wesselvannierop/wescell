@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 
 # Local imports
-from .unet_parts import Up, OutConv
+from .unet_parts import OutConv, Up
 
 
 class UNetDecoder(nn.Module):

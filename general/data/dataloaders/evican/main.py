@@ -1,5 +1,7 @@
 from pathlib import Path
+
 from PIL import ImageFile
+
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 

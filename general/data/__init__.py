@@ -1,4 +1,4 @@
-from .data_pair_creation import DataTransformPair, CollateFnWithTransforms
+from .data_pair_creation import CollateFnWithTransforms, DataTransformPair
 from .dataloaders import (
     EvicanDataset,
     GenericDataModule,
