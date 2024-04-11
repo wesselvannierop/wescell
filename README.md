@@ -12,6 +12,8 @@
 Unsupervised Cell Segmentation by Invariant Information Clustering created by Wessel L. van Nierop.
 Implemented using PyTorch and PyTorch Lightning.
 
+[[Link to paper](https://www.spiedigitallibrary.org/conference-proceedings-of-spie/12926/129260V/Unsupervised-cell-segmentation-by-invariant-information-clustering/10.1117/12.3001442.full)]
+
 ## Getting Started
 
 Setup the environment with the following commands:
