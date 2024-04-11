@@ -1,17 +1,18 @@
-import pytorch_lightning as pl
-from pytorch_lightning.callbacks import ModelCheckpoint
-from pytorch_lightning.loggers import TensorBoardLogger
-import torchvision.transforms as T
 from datetime import datetime
 from pathlib import Path
+
+import pytorch_lightning as pl
+import torchvision.transforms as T
+from pytorch_lightning.callbacks import ModelCheckpoint
+from pytorch_lightning.loggers import TensorBoardLogger
 from torch import set_float32_matmul_precision
 
 # Local imports
-from general.data.data_pair_creation import DataTransformPair, CollateFnWithTransforms
-from general.data.illumination_correction import IlluminationCorrection
-from general.data.dataloaders.generic import GenericDataModule, GenericDataset
+from general.data.data_pair_creation import CollateFnWithTransforms, DataTransformPair
 from general.data.dataloaders.evican import EvicanDataset
+from general.data.dataloaders.generic import GenericDataModule, GenericDataset
 from general.data.dataloaders.helpers import TrainValDataModule
+from general.data.illumination_correction import IlluminationCorrection
 from general.model import UnsupervisedWesCell
 
 

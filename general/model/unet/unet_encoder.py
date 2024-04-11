@@ -1,9 +1,10 @@
 import torch
 import torch.nn as nn
 
+from general.model.sobel import Sobel
+
 # Local imports
 from .unet_parts import DoubleConv, Down
-from general.model.sobel import Sobel
 
 
 class UNetEncoder(nn.Module):

@@ -1,24 +1,22 @@
 from .data import (
-    DataTransformPair,
     CollateFnWithTransforms,
+    DataTransformPair,
     EvicanDataset,
     GenericDataModule,
     GenericDataset,
-    TrainValDataModule,
     IlluminationCorrection,
+    TrainValDataModule,
 )
-
 from .metrics import CellConfluencyMetrics
 from .model import (
-    IICloss,
-    Sobel,
-    UNetEncoder,
-    UNetDecoder,
     DoubleConv,
     Down,
-    Up,
+    IICloss,
     OutConv,
+    Sobel,
+    UNetDecoder,
+    UNetEncoder,
     UnsupervisedWesCell,
+    Up,
 )
-
-from .utils import remap, get_confusion_matrix_overlaid_mask, remove_sacred_from_ckpt
+from .utils import get_confusion_matrix_overlaid_mask, remap, remove_sacred_from_ckpt

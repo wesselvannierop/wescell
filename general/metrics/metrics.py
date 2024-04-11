@@ -1,10 +1,10 @@
 import torch
 from torchmetrics.classification import (
-    BinaryJaccardIndex,
-    Dice,
     BinaryAccuracy,
-    BinaryRecall,
+    BinaryJaccardIndex,
     BinaryPrecision,
+    BinaryRecall,
+    Dice,
 )
 from torchmetrics.metric import Metric
 
